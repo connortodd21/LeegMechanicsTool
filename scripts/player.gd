@@ -26,6 +26,7 @@ const stop_moving_vector := Vector2(0,0)
 
 func _physics_process(_delta: float) -> void:
 	process_movement()
+	process_skills()
 	
 	if position.distance_to(move_to_location) > 10:
 		move_and_slide()
@@ -33,18 +34,34 @@ func _physics_process(_delta: float) -> void:
 		set_character_to_idle()
 
 
+################################################
+### PLAYER SKILLS
+################################################
+func process_skills() -> void:
+	if Input.is_action_just_pressed("q"):
+		pass
+	if Input.is_action_just_pressed("w"):
+		pass
+	if Input.is_action_just_pressed("e"):
+		pass
+	if Input.is_action_just_pressed("r"):
+		pass
+
 
 ################################################
 ### PLAYER MOVEMENT
 ################################################
 func process_movement() -> void:
+	# move command
 	if Input.is_action_just_pressed("move_to_spot"):
 		move_to_location = get_global_mouse_position()
 		handle_move_character(MOVING)
 		velocity = global_position.direction_to(move_to_location) * speed
-	if Input.is_action_just_pressed("s"):
+	# stop command
+	if Input.is_action_pressed("s"):
 		set_character_to_idle()
 		move_to_location = position
+
 
 func set_character_to_idle() -> void:
 	handle_move_character(IDLE)
