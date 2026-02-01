@@ -8,6 +8,15 @@ const MOVING = "moving"
 const IDLE = "idle"
 const ATTACK = "attack"
 
+
+enum MOVE_DIRECTION {
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	UNKNOWN
+}
+
 var speed = 300.0
 const JUMP_VELOCITY = -400.0
 
@@ -22,38 +31,57 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 	else:
 		set_character_to_idle()
-		
 
 
+
+################################################
+### PLAYER MOVEMENT
+################################################
 func process_movement() -> void:
 	if Input.is_action_just_pressed("move_to_spot"):
 		move_to_location = get_global_mouse_position()
-		update_character_facing_direction(MOVING)
+		handle_move_character(MOVING)
 		velocity = global_position.direction_to(move_to_location) * speed
-
+	if Input.is_action_just_pressed("s"):
+		set_character_to_idle()
+		move_to_location = position
 
 func set_character_to_idle() -> void:
-	update_character_facing_direction(IDLE)
+	handle_move_character(IDLE)
+ 
 
-func update_character_facing_direction(animation_type: String) -> void:
+func handle_move_character(animation_type: String) -> void:
 	move_direction = position.direction_to(move_to_location)
+	var movement_direction = get_movement_direction()
 	# if we are moving more horizontally than vertically
+	if movement_direction == MOVE_DIRECTION.LEFT:
+		animated_sprite_2d.animation = animation_type + "_side"
+		animated_sprite_2d.flip_h = true
+	elif movement_direction == MOVE_DIRECTION.RIGHT:
+		animated_sprite_2d.animation = animation_type + "_side"
+		animated_sprite_2d.flip_h = false
+	elif movement_direction == MOVE_DIRECTION.UP:
+		animated_sprite_2d.animation = animation_type + "_back"
+		animated_sprite_2d.flip_h = false
+	elif movement_direction == MOVE_DIRECTION.DOWN:
+		animated_sprite_2d.animation = animation_type + "_front"
+		animated_sprite_2d.flip_h = false
+
+
+func get_movement_direction() -> MOVE_DIRECTION:
 	if abs(move_direction.x) > abs(move_direction.y):
 		# move left
 		if move_direction.x < 0:
-			animated_sprite_2d.animation = animation_type + "_side"
-			animated_sprite_2d.flip_h = true
+			return MOVE_DIRECTION.LEFT
 		# move right
 		elif move_direction.x > 0:
-			animated_sprite_2d.animation = animation_type + "_side"
-			animated_sprite_2d.flip_h = false
+			return MOVE_DIRECTION.RIGHT
 	else:
 		# move up
 		if move_direction.y < 0:
-			animated_sprite_2d.animation = animation_type + "_back"
-			animated_sprite_2d.flip_h = false
+			return MOVE_DIRECTION.UP
 		# move down
 		elif move_direction.y > 0:
-			animated_sprite_2d.animation = animation_type + "_front"
-			animated_sprite_2d.flip_h = false
+			return MOVE_DIRECTION.DOWN
+	return MOVE_DIRECTION.UNKNOWN
 	
