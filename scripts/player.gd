@@ -57,7 +57,7 @@ func process_movement() -> void:
 
 func set_character_to_idle() -> void:
 	var animation_metadata = character.get_idle_animation_metadata(get_movement_direction())
-	if animation_metadata:
+	if animated_sprite_2d != null && animation_metadata:
 		animated_sprite_2d.animation = animation_metadata.get_animation_name()
 		animated_sprite_2d.flip_h = animation_metadata.get_should_flip_h()
  
@@ -65,7 +65,7 @@ func set_character_to_idle() -> void:
 func handle_move_character() -> void:
 	move_direction = position.direction_to(move_to_location)
 	var animation_metadata = character.get_moving_animation_metadata(get_movement_direction())
-	if animation_metadata:
+	if animated_sprite_2d != null && animation_metadata:
 		animated_sprite_2d.animation = animation_metadata.get_animation_name()
 		animated_sprite_2d.flip_h = animation_metadata.get_should_flip_h()
 

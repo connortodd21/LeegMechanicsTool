@@ -55,6 +55,7 @@ func get_moving_animation_metadata(direction: MovemenConstants.MOVE_DIRECTION) -
 
 func get_attack_animation_metadata() -> void:
 	pass
+
 ################################################
 ### PLAYER SKILLS
 ################################################
@@ -72,5 +73,3 @@ func use_e() -> void:
 
 func use_r() -> void:
 	pass
-	
-	

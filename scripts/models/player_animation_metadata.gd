@@ -3,7 +3,6 @@ class_name PlayerAnimationMetadata
 var animation_name: String
 var should_flip_h: bool
 
-
 func _init(_animation_name: String = "", _should_flip_h: bool = false) -> void:
 	animation_name = _animation_name
 	should_flip_h = _should_flip_h

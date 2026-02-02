@@ -1,5 +1,5 @@
 class_name CharacterAttributes
-	
+
 var health : float
 var max_health : float
 var mana : float
