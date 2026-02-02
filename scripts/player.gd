@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 var move_to_location : Vector2
-var move_direction : Vector2
 const stop_moving_vector := Vector2(0,0)
 
 # character
@@ -56,34 +55,18 @@ func process_movement() -> void:
 
 
 func set_character_to_idle() -> void:
-	var animation_metadata = character.get_idle_animation_metadata(get_movement_direction())
-	if animated_sprite_2d != null && animation_metadata:
-		animated_sprite_2d.animation = animation_metadata.get_animation_name()
-		animated_sprite_2d.flip_h = animation_metadata.get_should_flip_h()
+	var move_direction = MovementUtils.get_movement_direction(position.direction_to(move_to_location))
+	var animation_metadata = character.get_idle_animation_metadata(move_direction)
+	update_animation(animation_metadata)
  
 
 func handle_move_character() -> void:
-	move_direction = position.direction_to(move_to_location)
-	var animation_metadata = character.get_moving_animation_metadata(get_movement_direction())
+	var move_direction = MovementUtils.get_movement_direction(position.direction_to(move_to_location))
+	var animation_metadata = character.get_moving_animation_metadata(move_direction)
+	update_animation(animation_metadata)
+
+
+func update_animation(animation_metadata: PlayerAnimationMetadata) -> void:
 	if animated_sprite_2d != null && animation_metadata:
 		animated_sprite_2d.animation = animation_metadata.get_animation_name()
 		animated_sprite_2d.flip_h = animation_metadata.get_should_flip_h()
-
-
-func get_movement_direction() -> MovemenConstants.MOVE_DIRECTION:
-	if abs(move_direction.x) > abs(move_direction.y):
-		# move left
-		if move_direction.x < 0:
-			return MovemenConstants.MOVE_DIRECTION.LEFT
-		# move right
-		elif move_direction.x > 0:
-			return MovemenConstants.MOVE_DIRECTION.RIGHT
-	else:
-		# move up
-		if move_direction.y < 0:
-			return MovemenConstants.MOVE_DIRECTION.UP
-		# move down
-		elif move_direction.y > 0:
-			return MovemenConstants.MOVE_DIRECTION.DOWN
-	return MovemenConstants.MOVE_DIRECTION.UNKNOWN
-	

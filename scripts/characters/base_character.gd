@@ -21,33 +21,33 @@ func heal(heal_amount: float) -> void:
 ################################################
 ### PLAYER ANIMATIONS
 ################################################
-func get_idle_animation_metadata(direction: MovemenConstants.MOVE_DIRECTION) -> PlayerAnimationMetadata:
-	var idle = MovemenConstants.IDLE
+func get_idle_animation_metadata(direction: MovementConstants.MOVE_DIRECTION) -> PlayerAnimationMetadata:
+	var idle = MovementConstants.IDLE
 	
 	match direction:
-		MovemenConstants.MOVE_DIRECTION.LEFT:
+		MovementConstants.MOVE_DIRECTION.LEFT:
 			return PlayerAnimationMetadata.new(idle + "_side", true)
-		MovemenConstants.MOVE_DIRECTION.RIGHT:
+		MovementConstants.MOVE_DIRECTION.RIGHT:
 			return PlayerAnimationMetadata.new(idle + "_side", false)
-		MovemenConstants.MOVE_DIRECTION.UP:
+		MovementConstants.MOVE_DIRECTION.UP:
 			return PlayerAnimationMetadata.new(idle + "_back", false)
-		MovemenConstants.MOVE_DIRECTION.DOWN:
+		MovementConstants.MOVE_DIRECTION.DOWN:
 			return PlayerAnimationMetadata.new(idle + "_front", false)
 		_:
 			return PlayerAnimationMetadata.new("", false)
 
 
-func get_moving_animation_metadata(direction: MovemenConstants.MOVE_DIRECTION) -> PlayerAnimationMetadata:
-	var moving = MovemenConstants.MOVING
+func get_moving_animation_metadata(direction: MovementConstants.MOVE_DIRECTION) -> PlayerAnimationMetadata:
+	var moving = MovementConstants.MOVING
 	
 	match direction:
-		MovemenConstants.MOVE_DIRECTION.LEFT:
+		MovementConstants.MOVE_DIRECTION.LEFT:
 			return PlayerAnimationMetadata.new(moving + "_side", true)
-		MovemenConstants.MOVE_DIRECTION.RIGHT:
+		MovementConstants.MOVE_DIRECTION.RIGHT:
 			return PlayerAnimationMetadata.new(moving + "_side", false)
-		MovemenConstants.MOVE_DIRECTION.UP:
+		MovementConstants.MOVE_DIRECTION.UP:
 			return PlayerAnimationMetadata.new(moving + "_back", false)
-		MovemenConstants.MOVE_DIRECTION.DOWN:
+		MovementConstants.MOVE_DIRECTION.DOWN:
 			return PlayerAnimationMetadata.new(moving + "_front", false)
 		_:
 			return PlayerAnimationMetadata.new("", false)

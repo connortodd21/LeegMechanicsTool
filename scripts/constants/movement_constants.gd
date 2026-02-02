@@ -1,4 +1,4 @@
-class_name MovemenConstants
+class_name MovementConstants
 
 enum MOVE_DIRECTION {
 	LEFT,
