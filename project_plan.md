@@ -13,6 +13,22 @@
     - move on left click
     - s to stop moving
     - click on target = auto attack
+- each player has
+  - health bar
+  - abilities
+    - each ability has
+      - cooldown
+      - activation and values
+        - attack
+        - shield/heal
+        - move
+      - animations
+      - icon
+      - mana cost
+  - move speed
+  - attack damage
+  - mana count
+  - health/mana regen
 
 
 ### Skillshots

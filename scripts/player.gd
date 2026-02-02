@@ -8,7 +8,7 @@ const MOVING = "moving"
 const IDLE = "idle"
 const ATTACK = "attack"
 
-
+# movement
 enum MOVE_DIRECTION {
 	LEFT,
 	RIGHT,
@@ -16,13 +16,15 @@ enum MOVE_DIRECTION {
 	DOWN,
 	UNKNOWN
 }
-
-var speed = 300.0
-const JUMP_VELOCITY = -400.0
-
 var move_to_location : Vector2
 var move_direction : Vector2
 const stop_moving_vector := Vector2(0,0)
+
+# character
+var character : BaseCharacter
+
+func _ready() -> void:
+	character = Ezreal.new()
 
 func _physics_process(_delta: float) -> void:
 	process_movement()
@@ -56,7 +58,7 @@ func process_movement() -> void:
 	if Input.is_action_just_pressed("move_to_spot"):
 		move_to_location = get_global_mouse_position()
 		handle_move_character(MOVING)
-		velocity = global_position.direction_to(move_to_location) * speed
+		velocity = global_position.direction_to(move_to_location) * CharacterUtils.get_move_speed(character)
 	# stop command
 	if Input.is_action_pressed("s"):
 		set_character_to_idle()
