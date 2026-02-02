@@ -1,4 +1,4 @@
-extends BaseCharacter
+extends BaseCharacter 
 class_name Ezreal
 
 func _init() -> void:
@@ -9,7 +9,8 @@ func _init() -> void:
 	var health_regen = 2
 	var mana_regen = 5
 	var move_speed = 300
+	var character = Character.CHARACTERS.EZREAL
 	var _character_attributes = CharacterAttributes.new(
-		health, max_health, mana, max_health, health_regen, mana_regen, move_speed
+		health, max_health, mana, max_mana, health_regen, mana_regen, move_speed, character
 	)
 	super._init(_character_attributes)

@@ -1,21 +1,5 @@
 extends CharacterBody2D
 
-
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
-# animations
-const MOVING = "moving"
-const IDLE = "idle"
-const ATTACK = "attack"
-
-# movement
-enum MOVE_DIRECTION {
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN,
-	UNKNOWN
-}
 var move_to_location : Vector2
 var move_direction : Vector2
 const stop_moving_vector := Vector2(0,0)
@@ -23,8 +7,14 @@ const stop_moving_vector := Vector2(0,0)
 # character
 var character : BaseCharacter
 
+# character animations
+var animated_sprite_2d : AnimatedSprite2D
+@onready var character_animations: CharacterAnimations = $CharacterAnimations
+
 func _ready() -> void:
 	character = Ezreal.new()
+	animated_sprite_2d = character_animations.get_animations(character.character_attributes.character)
+
 
 func _physics_process(_delta: float) -> void:
 	process_movement()
@@ -57,7 +47,7 @@ func process_movement() -> void:
 	# move command
 	if Input.is_action_just_pressed("move_to_spot"):
 		move_to_location = get_global_mouse_position()
-		handle_move_character(MOVING)
+		handle_move_character()
 		velocity = global_position.direction_to(move_to_location) * CharacterUtils.get_move_speed(character)
 	# stop command
 	if Input.is_action_pressed("s"):
@@ -66,41 +56,34 @@ func process_movement() -> void:
 
 
 func set_character_to_idle() -> void:
-	handle_move_character(IDLE)
+	var animation_metadata = character.get_idle_animation_metadata(get_movement_direction())
+	if animation_metadata:
+		animated_sprite_2d.animation = animation_metadata.get_animation_name()
+		animated_sprite_2d.flip_h = animation_metadata.get_should_flip_h()
  
 
-func handle_move_character(animation_type: String) -> void:
+func handle_move_character() -> void:
 	move_direction = position.direction_to(move_to_location)
-	var movement_direction = get_movement_direction()
-	# if we are moving more horizontally than vertically
-	if movement_direction == MOVE_DIRECTION.LEFT:
-		animated_sprite_2d.animation = animation_type + "_side"
-		animated_sprite_2d.flip_h = true
-	elif movement_direction == MOVE_DIRECTION.RIGHT:
-		animated_sprite_2d.animation = animation_type + "_side"
-		animated_sprite_2d.flip_h = false
-	elif movement_direction == MOVE_DIRECTION.UP:
-		animated_sprite_2d.animation = animation_type + "_back"
-		animated_sprite_2d.flip_h = false
-	elif movement_direction == MOVE_DIRECTION.DOWN:
-		animated_sprite_2d.animation = animation_type + "_front"
-		animated_sprite_2d.flip_h = false
+	var animation_metadata = character.get_moving_animation_metadata(get_movement_direction())
+	if animation_metadata:
+		animated_sprite_2d.animation = animation_metadata.get_animation_name()
+		animated_sprite_2d.flip_h = animation_metadata.get_should_flip_h()
 
 
-func get_movement_direction() -> MOVE_DIRECTION:
+func get_movement_direction() -> MovemenConstants.MOVE_DIRECTION:
 	if abs(move_direction.x) > abs(move_direction.y):
 		# move left
 		if move_direction.x < 0:
-			return MOVE_DIRECTION.LEFT
+			return MovemenConstants.MOVE_DIRECTION.LEFT
 		# move right
 		elif move_direction.x > 0:
-			return MOVE_DIRECTION.RIGHT
+			return MovemenConstants.MOVE_DIRECTION.RIGHT
 	else:
 		# move up
 		if move_direction.y < 0:
-			return MOVE_DIRECTION.UP
+			return MovemenConstants.MOVE_DIRECTION.UP
 		# move down
 		elif move_direction.y > 0:
-			return MOVE_DIRECTION.DOWN
-	return MOVE_DIRECTION.UNKNOWN
+			return MovemenConstants.MOVE_DIRECTION.DOWN
+	return MovemenConstants.MOVE_DIRECTION.UNKNOWN
 	

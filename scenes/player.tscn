@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cei2amnkgqvrb"]
 
 [ext_resource type="Script" uid="uid://cgmoivs4i60cg" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://b2mddpc1q6mic" path="res://scripts/characters/character_animations.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://lpjb65bhq7s4" path="res://assets/Cute_Fantasy_Free/Player/Player.png" id="2_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
@@ -392,7 +393,10 @@ script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1224331642]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1793340051]
+[node name="CharacterAnimations" type="Node2D" parent="." unique_id=156556002]
+script = ExtResource("2_dqkch")
+
+[node name="Ezreal" type="AnimatedSprite2D" parent="CharacterAnimations" unique_id=1793340051]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_sc3ue")
 animation = &"idle_front"
