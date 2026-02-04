@@ -7,7 +7,7 @@ var speed: float = 900
 var max_distance: float = 300
 var start_position: Vector2
 	
-func initialize(_position: Vector2, _direction: Vector2) -> void:
+func _initialize(_position: Vector2, _direction: Vector2) -> void:
 	global_position = _position
 	start_position = _position
 	direction = _direction.normalized()

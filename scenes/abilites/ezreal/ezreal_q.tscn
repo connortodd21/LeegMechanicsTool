@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b8idpypi387md"]
 
-[ext_resource type="Script" uid="uid://dtgmtsvy8nji5" path="res://scripts/abilities/ezreal/ezreal_q.gd" id="1_bsx04"]
-[ext_resource type="Texture2D" uid="uid://bkytv23dsf1lw" path="res://assets/Skillshots/ezreal_q.png" id="1_naxbw"]
+[ext_resource type="Script" uid="uid://dtgmtsvy8nji5" path="res://scripts/abilities/ezreal/ezreal_q.gd" id="1_mpnen"]
+[ext_resource type="Texture2D" uid="uid://bkytv23dsf1lw" path="res://assets/Skillshots/ezreal_q.png" id="2_anhdm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7hjpq"]
-atlas = ExtResource("1_naxbw")
+atlas = ExtResource("2_anhdm")
 region = Rect2(0, 0, 10, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ixo5b"]
@@ -22,7 +22,7 @@ animations = [{
 radius = 5.0
 
 [node name="EzrealQ" type="Node2D" unique_id=1143123891]
-script = ExtResource("1_bsx04")
+script = ExtResource("1_mpnen")
 
 [node name="Q" type="Area2D" parent="." unique_id=2051585452]
 metadata/_edit_group_ = true

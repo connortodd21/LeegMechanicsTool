@@ -11,7 +11,7 @@ var animated_sprite_2d : AnimatedSprite2D
 @onready var character_animations: CharacterAnimations = $CharacterAnimations
 
 # abilities
-@export var ability_loadout: AbilityLoadout
+@export var ability_loadout: AbilityLoadoutResource
 @onready var ability_manager = $"../AbilitiesManager"
 
 # effects

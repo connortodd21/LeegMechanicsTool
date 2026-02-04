@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" format=3 uid="uid://cug4m1si7o0qb"]
 
-[ext_resource type="PackedScene" uid="uid://b8idpypi387md" path="res://scenes/abilites/ezreal_q.tscn" id="1_7ffhr"]
+[ext_resource type="PackedScene" uid="uid://b8idpypi387md" path="res://scenes/abilites/ezreal/ezreal_q.tscn" id="1_7ffhr"]
 [ext_resource type="Script" uid="uid://bjakln4h30ktu" path="res://resources/abilities_resource.gd" id="2_ia45d"]
 
 [resource]
