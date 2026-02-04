@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://ctaxjc7yl101f"]
+
+[ext_resource type="Script" uid="uid://d2ia3n2syv3hd" path="res://resources/characters/character_data.gd" id="1_e6uup"]
+[ext_resource type="Resource" uid="uid://kh0gnd8jkrte" path="res://resources/ability_loadouts/ezreal/loadout.tres" id="1_p1kd0"]
+[ext_resource type="PackedScene" uid="uid://bw5iy2yxkorx6" path="res://scenes/characters/animations/ezreal.tscn" id="2_0abxb"]
+
+[resource]
+script = ExtResource("1_e6uup")
+max_health = 700.0
+max_mana = 300.0
+health_regen = 3.0
+mana_regen = 10.0
+move_speed = 300.0
+ability_loadout = ExtResource("1_p1kd0")
+animations_scene = ExtResource("2_0abxb")
+metadata/_custom_type_script = "uid://d2ia3n2syv3hd"

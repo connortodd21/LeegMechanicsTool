@@ -1,6 +1,6 @@
 class_name BaseCharacter extends Node
 
-var character_attributes: CharacterAttributes
+var character_metadata: CharacterMetadata
 
 const Q = "Q"
 const W = "W"
@@ -8,8 +8,17 @@ const E = "E"
 const R = "R"
 var ability_cooldowns := {}
 
-func _init(_character_attributes : CharacterAttributes) -> void:
-	character_attributes = _character_attributes
+func _init(character_data : CharacterData) -> void:
+	character_metadata = CharacterMetadata.new(
+		character_data.max_health,
+		character_data.max_health,
+		character_data.max_mana,
+		character_data.max_mana,
+		character_data.health_regen,
+		character_data.mana_regen,
+		character_data.move_speed,
+		character_data.character
+	)
 
 
 ################################################
@@ -29,21 +38,23 @@ func tick_cooldowns(delta: float) -> void:
 	for ability in ability_cooldowns.keys():
 		if ability_cooldowns[ability] >= 0:
 			ability_cooldowns[ability] -= delta
-################################################
-### PLAYER ATTRIBUTES
-################################################
-func increase_health() -> void:
-	clampf(character_attributes.health, character_attributes.health + character_attributes.health_regen, character_attributes.max_health)
 
-func increase_mana() -> void:
-	clampf(character_attributes.mana, character_attributes.mana + character_attributes.mana_regen, character_attributes.max_mana)
+################################################
+### PLAYER METADATA
+################################################
+func regen(delta: float) -> void:
+	character_metadata.health = clamp(character_metadata.health + character_metadata.health_regen * delta, character_metadata.health, character_metadata.max_health)
+	character_metadata.mana = clamp(character_metadata.mana + character_metadata.mana_regen * delta, character_metadata.mana, character_metadata.max_mana)
+
+func increase_mana(mana_amount: float) -> void:
+	clampf(character_metadata.mana + mana_amount, character_metadata.mana, character_metadata.max_mana)
 
 func heal(heal_amount: float) -> void:
-	clampf(character_attributes.health, character_attributes.health + heal_amount, character_attributes.max_health)
+	character_metadata.health = clamp(character_metadata.health + heal_amount, character_metadata.health, character_metadata.max_health)
 
 
 ################################################
-### PLAYER ANIMATIONS
+### PLAYER ANIMATION METADATA
 ################################################
 func get_idle_animation_metadata(direction: MovementConstants.MOVE_DIRECTION) -> PlayerAnimationMetadata:
 	var idle = MovementConstants.IDLE
