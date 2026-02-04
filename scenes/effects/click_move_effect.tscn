@@ -33,6 +33,7 @@ animations = [{
 }]
 
 [node name="ClickMoveEffect" type="Node2D" unique_id=1805195092]
+z_index = -1
 script = ExtResource("1_ipu0o")
 color = Color(1, 1, 1, 1)
 
