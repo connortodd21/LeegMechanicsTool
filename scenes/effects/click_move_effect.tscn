@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cvg36wckcnfql"]
+
+[ext_resource type="Script" uid="uid://bmgcba3ni3i1g" path="res://scripts/effects/click_move_effect.gd" id="1_ipu0o"]
+[ext_resource type="Texture2D" uid="uid://yepv1he5c8hk" path="res://assets/Effects/white_ring_click_effect.png" id="2_ipu0o"]
+
+[node name="ClickMoveEffect" type="Node2D" unique_id=1805195092]
+script = ExtResource("1_ipu0o")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1177504755]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ipu0o")

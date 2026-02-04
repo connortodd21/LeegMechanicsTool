@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cgmoivs4i60cg" path="res://scripts/game_scripts/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://b2mddpc1q6mic" path="res://scripts/characters/character_animations.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://lpjb65bhq7s4" path="res://assets/Cute_Fantasy_Free/Player/Player.png" id="2_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://cvg36wckcnfql" path="res://scenes/effects/click_move_effect.tscn" id="2_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_qhqgy")
@@ -390,6 +391,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" unique_id=640731228]
 script = ExtResource("1_g2els")
+click_move_effect_scene = ExtResource("2_qlg0r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1224331642]
 

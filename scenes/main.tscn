@@ -10,3 +10,5 @@ position = Vector2(544, 311)
 scale = Vector2(3, 3)
 
 [node name="AbilitiesManager" parent="." unique_id=686611845 instance=ExtResource("2_0wfyh")]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=800235666]
