@@ -22,6 +22,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	process_movement()
 	process_skills()
+	character.tick_cooldowns(_delta)
 	
 	if position.distance_to(move_to_location) > 10:
 		move_and_slide()
@@ -60,7 +61,10 @@ func process_skills() -> void:
 			pass
 
 func cast_ability(ability: AbilityResource) -> void:
-	ability_manager.cast(ability, position, get_mouse_direction())
+	if ability != null:
+		if character.get_cooldown(ability) <= 0:
+			character.set_cooldown(ability)
+			ability_manager.cast(ability, position, get_mouse_direction())
 
 ################################################ 
 ### PLAYER MOVEMENT

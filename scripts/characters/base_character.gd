@@ -2,9 +2,33 @@ class_name BaseCharacter extends Node
 
 var character_attributes: CharacterAttributes
 
+const Q = "Q"
+const W = "W"
+const E = "E"
+const R = "R"
+var ability_cooldowns := {}
+
 func _init(_character_attributes : CharacterAttributes) -> void:
 	character_attributes = _character_attributes
 
+
+################################################
+### ABILITY ATTRIBUTES
+################################################
+func get_cooldown(ability: AbilityResource) -> float:
+	if ability in ability_cooldowns.keys():
+		return ability_cooldowns[ability]
+	return -1
+
+
+func set_cooldown(ability: AbilityResource) -> void:
+	ability_cooldowns[ability] = ability.cooldown
+
+
+func tick_cooldowns(delta: float) -> void:
+	for ability in ability_cooldowns.keys():
+		if ability_cooldowns[ability] > 0:
+			ability_cooldowns[ability] -= delta
 ################################################
 ### PLAYER ATTRIBUTES
 ################################################

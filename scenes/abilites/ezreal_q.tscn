@@ -31,7 +31,7 @@ metadata/_edit_group_ = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ixo5b")
 animation = &"active"
-frame_progress = 0.33067945
+frame_progress = 0.2083546
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Q" unique_id=1445786869]
 texture_filter = 1
