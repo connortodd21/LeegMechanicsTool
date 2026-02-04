@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AbilityResource" format=3 uid="uid://cug4m1si7o0qb"]
+
+[ext_resource type="Script" uid="uid://bjakln4h30ktu" path="res://resources/abilities_resource.gd" id="1_4hfg8"]
+[ext_resource type="PackedScene" uid="uid://b8idpypi387md" path="res://scenes/abilites/ezreal_q.tscn" id="1_x731v"]
+
+[resource]
+script = ExtResource("1_4hfg8")
+damage = 80.0
+mana_cost = 30.0
+cooldown = 5.0
+scene = ExtResource("1_x731v")
+metadata/_custom_type_script = "uid://bjakln4h30ktu"

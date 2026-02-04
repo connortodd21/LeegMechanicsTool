@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://b8idpypi387md"]
+
+[ext_resource type="Script" uid="uid://dtgmtsvy8nji5" path="res://scripts/abilities/ezreal/ezreal_q.gd" id="1_bsx04"]
+[ext_resource type="Texture2D" uid="uid://bkytv23dsf1lw" path="res://assets/Skillshots/ezreal_q.png" id="1_naxbw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hjpq"]
+atlas = ExtResource("1_naxbw")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ixo5b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hjpq")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ixo5b"]
+radius = 5.0
+
+[node name="EzrealQ" type="Node2D" unique_id=1143123891]
+script = ExtResource("1_bsx04")
+
+[node name="Q" type="Area2D" parent="." unique_id=2051585452]
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Q" unique_id=244635498]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ixo5b")
+animation = &"active"
+frame_progress = 0.33067945
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Q" unique_id=1445786869]
+texture_filter = 1
+shape = SubResource("CircleShape2D_ixo5b")

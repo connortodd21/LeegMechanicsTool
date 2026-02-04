@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://deicbgfiuaahr"]
 
 [ext_resource type="PackedScene" uid="uid://cei2amnkgqvrb" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dgbenuhc1gc2q" path="res://scenes/abilites_manager.tscn" id="2_0wfyh"]
 
 [node name="main" type="Node2D" unique_id=1749545947]
 
 [node name="Player" parent="." unique_id=89627237 instance=ExtResource("1_o5qli")]
 position = Vector2(544, 311)
 scale = Vector2(3, 3)
+
+[node name="AbilitiesManager" parent="." unique_id=686611845 instance=ExtResource("2_0wfyh")]

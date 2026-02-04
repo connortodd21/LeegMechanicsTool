@@ -10,10 +10,14 @@ var character : BaseCharacter
 var animated_sprite_2d : AnimatedSprite2D
 @onready var character_animations: CharacterAnimations = $CharacterAnimations
 
+# abilities
+@export var ability_loadout: AbilityLoadout
+@onready var ability_manager = $"../AbilitiesManager"
+
 func _ready() -> void:
 	character = Ezreal.new()
 	animated_sprite_2d = character_animations.get_animations(character.character_attributes.character)
-
+	load_character_skills()
 
 func _physics_process(_delta: float) -> void:
 	process_movement()
@@ -26,20 +30,39 @@ func _physics_process(_delta: float) -> void:
 
 
 ################################################
+### MOUSE DATA
+################################################
+func get_mouse_direction() -> Vector2:
+	var mouse_pos = get_global_mouse_position()   # mouse position in world
+	var dir = mouse_pos - global_position        # vector from player to mouse
+	return dir.normalized()  
+
+
+################################################
 ### PLAYER SKILLS
 ################################################
+func load_character_skills() -> void:
+	var character_name = Character.get_character_name(character.character_attributes.character)
+	if character_name != Character.INVALID:
+		var character_resource_path = "res://resources/ability_loadouts/%s/loadout.tres" % character_name
+		print(character_resource_path)
+		ability_loadout = load(character_resource_path)
+
 func process_skills() -> void:
-	if Input.is_action_just_pressed("q"):
-		pass
-	if Input.is_action_just_pressed("w"):
-		pass
-	if Input.is_action_just_pressed("e"):
-		pass
-	if Input.is_action_just_pressed("r"):
-		pass
+	if ability_loadout != null:
+		if Input.is_action_just_pressed("q"):
+			cast_ability(ability_loadout.q)
+		if Input.is_action_just_pressed("w"):
+			pass
+		if Input.is_action_just_pressed("e"):
+			pass
+		if Input.is_action_just_pressed("r"):
+			pass
 
+func cast_ability(ability: AbilityResource) -> void:
+	ability_manager.cast(ability, position, get_mouse_direction())
 
-################################################
+################################################ 
 ### PLAYER MOVEMENT
 ################################################
 func process_movement() -> void:
