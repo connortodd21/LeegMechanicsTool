@@ -78,7 +78,7 @@ func process_movement() -> void:
 	if Input.is_action_just_pressed("move_to_spot"):
 		move_to_location = get_global_mouse_position()
 		velocity = global_position.direction_to(move_to_location) * CharacterUtils.get_move_speed(character)
-		#spawn_click_effect(move_to_location)
+		spawn_click_effect(move_to_location)
 		handle_move_character()
 	# stop command
 	if Input.is_action_pressed("s"):

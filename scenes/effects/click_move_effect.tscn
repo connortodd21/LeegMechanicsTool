@@ -1,11 +1,41 @@
 [gd_scene format=3 uid="uid://cvg36wckcnfql"]
 
 [ext_resource type="Script" uid="uid://bmgcba3ni3i1g" path="res://scripts/effects/click_move_effect.gd" id="1_ipu0o"]
-[ext_resource type="Texture2D" uid="uid://yepv1he5c8hk" path="res://assets/Effects/white_ring_click_effect.png" id="2_ipu0o"]
+[ext_resource type="Texture2D" uid="uid://xu1y6njfvjhg" path="res://assets/Effects/white_click_effect.png" id="2_ipu0o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x12mf"]
+atlas = ExtResource("2_ipu0o")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owyx3"]
+atlas = ExtResource("2_ipu0o")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hyn2"]
+atlas = ExtResource("2_ipu0o")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j5cgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x12mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owyx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hyn2")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="ClickMoveEffect" type="Node2D" unique_id=1805195092]
 script = ExtResource("1_ipu0o")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1177504755]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1256524687]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_ipu0o")
+sprite_frames = SubResource("SpriteFrames_j5cgy")
+speed_scale = 2.0

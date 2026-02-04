@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yepv1he5c8hk"
-path="res://.godot/imported/white_ring_click_effect.png-b31a17fc746443e9a5794d51aae4a5a0.ctex"
+uid="uid://xu1y6njfvjhg"
+path="res://.godot/imported/white_click_effect.png-6c3d6c2984078f4cd8e3c476fcd6e41d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Effects/white_ring_click_effect.png"
-dest_files=["res://.godot/imported/white_ring_click_effect.png-b31a17fc746443e9a5794d51aae4a5a0.ctex"]
+source_file="res://assets/Effects/white_click_effect.png"
+dest_files=["res://.godot/imported/white_click_effect.png-6c3d6c2984078f4cd8e3c476fcd6e41d.ctex"]
 
 [params]
 
