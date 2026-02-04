@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityLoadout" format=3 uid="uid://kh0gnd8jkrte"]
 
-[ext_resource type="Script" uid="uid://ce344ma11yywh" path="res://resources/abilites_loadout_resource.gd" id="1_h6168"]
+[ext_resource type="Script" uid="uid://ce344ma11yywh" path="res://resources/ability_loadouts/abilites_loadout_resource.gd" id="1_h6168"]
 [ext_resource type="Resource" uid="uid://cug4m1si7o0qb" path="res://resources/ability_loadouts/ezreal/q.tres" id="1_u7s56"]
 
 [resource]

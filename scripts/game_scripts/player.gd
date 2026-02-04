@@ -5,27 +5,29 @@ const stop_moving_vector := Vector2(0,0)
 
 # character
 var character : BaseCharacter
+@export var character_data : CharacterData
 
 # character animations
 var animated_sprite_2d : AnimatedSprite2D
-@onready var character_animations: CharacterAnimations = $CharacterAnimations
+@onready var character_animations: Node2D = $CharacterAnimations
 
 # abilities
-@export var ability_loadout: AbilityLoadoutResource
+var ability_loadout: AbilityLoadoutResource
 @onready var ability_manager = $"../AbilitiesManager"
 
 # effects
 @export var click_move_effect_scene: PackedScene
 
 func _ready() -> void:
-	character = Ezreal.new()
-	animated_sprite_2d = character_animations.get_animations(character.character_attributes.character)
+	character = BaseCharacter.new(character_data)
 	load_character_skills()
+	setup_visuals()
 
 func _physics_process(_delta: float) -> void:
 	process_movement()
 	process_skills()
 	character.tick_cooldowns(_delta)
+	character.regen(_delta)
 	
 	if position.distance_to(move_to_location) > 10:
 		move_and_slide()
@@ -45,11 +47,8 @@ func get_mouse_direction() -> Vector2:
 ################################################
 ### PLAYER SKILLS
 ################################################
-func load_character_skills() -> void:
-	var character_name = Character.get_character_name(character.character_attributes.character)
-	if character_name != Character.INVALID:
-		var character_resource_path = "res://resources/ability_loadouts/%s/loadout.tres" % character_name
-		ability_loadout = load(character_resource_path)
+func load_character_skills():
+	ability_loadout = character_data.ability_loadout
 
 func process_skills() -> void:
 	if ability_loadout != null:
@@ -69,6 +68,7 @@ func cast_ability(ability: AbilityResource) -> void:
 			if ability.should_stop_movement:
 				set_character_to_idle()
 			ability_manager.cast(ability, global_position, get_mouse_direction())
+
 
 ################################################ 
 ### PLAYER MOVEMENT
@@ -104,6 +104,15 @@ func update_animation(animation_metadata: PlayerAnimationMetadata) -> void:
 	if animated_sprite_2d != null && animation_metadata:
 		animated_sprite_2d.animation = animation_metadata.get_animation_name()
 		animated_sprite_2d.flip_h = animation_metadata.get_should_flip_h()
+
+
+################################################ 
+### Character Animations
+################################################
+func setup_visuals():
+	var animation_scene = character_data.animations_scene.instantiate()
+	character_animations.add_child(animation_scene)
+	animated_sprite_2d = animation_scene.get_node("AnimatedSprite2D")
 
 ################################################ 
 ### EFFECTS
