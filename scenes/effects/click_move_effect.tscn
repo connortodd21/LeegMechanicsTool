@@ -34,6 +34,7 @@ animations = [{
 
 [node name="ClickMoveEffect" type="Node2D" unique_id=1805195092]
 script = ExtResource("1_ipu0o")
+color = Color(1, 1, 1, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1256524687]
 scale = Vector2(0.1, 0.1)

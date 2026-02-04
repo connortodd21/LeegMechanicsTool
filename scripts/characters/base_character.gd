@@ -27,7 +27,7 @@ func set_cooldown(ability: AbilityResource) -> void:
 
 func tick_cooldowns(delta: float) -> void:
 	for ability in ability_cooldowns.keys():
-		if ability_cooldowns[ability] > 0:
+		if ability_cooldowns[ability] >= 0:
 			ability_cooldowns[ability] -= delta
 ################################################
 ### PLAYER ATTRIBUTES

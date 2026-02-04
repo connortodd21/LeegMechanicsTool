@@ -68,7 +68,7 @@ func cast_ability(ability: AbilityResource) -> void:
 			character.set_cooldown(ability)
 			if ability.should_stop_movement:
 				set_character_to_idle()
-			ability_manager.cast(ability, position, get_mouse_direction())
+			ability_manager.cast(ability, global_position, get_mouse_direction())
 
 ################################################ 
 ### PLAYER MOVEMENT
