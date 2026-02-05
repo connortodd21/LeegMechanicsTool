@@ -18,6 +18,9 @@ var ability_loadout: AbilityLoadoutResource
 # effects
 @export var click_move_effect_scene: PackedScene
 
+# movement
+var last_facing_direction := Vector2.DOWN # the last known direction the character is facing
+
 func _ready() -> void:
 	character = BaseCharacter.new(character_data)
 	load_character_skills()
@@ -31,17 +34,18 @@ func _physics_process(_delta: float) -> void:
 	
 	if position.distance_to(move_to_location) > 10:
 		move_and_slide()
+		last_facing_direction =(move_to_location - position).normalized()
 	else:
-		set_character_to_idle()
+		set_character_to_idle(last_facing_direction)
 
 
 ################################################
 ### MOUSE DATA
 ################################################
 func get_mouse_direction() -> Vector2:
-	var mouse_pos = get_global_mouse_position()   # mouse position in world
-	var dir = mouse_pos - global_position        # vector from player to mouse
-	return dir.normalized()  
+	var mouse_pos = get_global_mouse_position()
+	var mouse_direction = mouse_pos - global_position
+	return mouse_direction.normalized()  
 
 
 ################################################
@@ -65,9 +69,11 @@ func cast_ability(ability: AbilityResource) -> void:
 	if ability != null:
 		if character.get_cooldown(ability) <= 0:
 			character.set_cooldown(ability)
+			var mouse_direction = get_mouse_direction()
+			last_facing_direction = mouse_direction.normalized()
 			if ability.should_stop_movement:
-				set_character_to_idle()
-			ability_manager.cast(ability, global_position, get_mouse_direction())
+				set_character_to_idle(last_facing_direction)
+			ability_manager.cast(ability, global_position, mouse_direction)
 
 
 ################################################ 
@@ -82,16 +88,21 @@ func process_movement() -> void:
 		handle_move_character()
 	# stop command
 	if Input.is_action_pressed("s"):
-		set_character_to_idle()
-		move_to_location = position
+		set_character_to_idle(last_facing_direction)
 
 
-func set_character_to_idle() -> void:
+func set_character_to_idle(facing_direction: Vector2 = Vector2.DOWN) -> void:
+	var move_to_direction : MovementConstants.MOVE_DIRECTION
+	# if character is moving
 	if move_to_location != position:
-		var move_direction = MovementUtils.get_movement_direction(position.direction_to(move_to_location))
+		move_to_direction = MovementUtils.get_movement_direction(position.direction_to(move_to_location))
 		move_to_location = position
-		var animation_metadata = character.get_idle_animation_metadata(move_direction)
-		update_animation(animation_metadata)
+	elif facing_direction != Vector2.ZERO:
+		move_to_direction = MovementUtils.get_movement_direction(facing_direction)
+	else:
+		move_to_direction = MovementConstants.MOVE_DIRECTION.DOWN
+	var animation_metadata = character.get_idle_animation_metadata(move_to_direction)
+	update_animation(animation_metadata)
  
 
 func handle_move_character() -> void:

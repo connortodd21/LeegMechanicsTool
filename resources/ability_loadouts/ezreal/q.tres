@@ -7,7 +7,7 @@
 script = ExtResource("2_ia45d")
 damage = 80.0
 mana_cost = 30.0
-cooldown = 5.0
+cooldown = 0.5
 scene = ExtResource("1_7ffhr")
 should_stop_movement = true
 metadata/_custom_type_script = "uid://bjakln4h30ktu"
