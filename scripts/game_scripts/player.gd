@@ -128,6 +128,7 @@ func setup_visuals():
 ################################################ 
 ### EFFECTS
 ################################################
+# TODO: MOVE THIS TO MAIN SCENE
 func spawn_click_effect(click_position: Vector2, color: Color = Color.DARK_GREEN) -> void:
 	var effect = click_move_effect_scene.instantiate()
 	effect.global_position = click_position
