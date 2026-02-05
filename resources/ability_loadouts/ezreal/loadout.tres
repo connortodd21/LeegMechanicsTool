@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ce344ma11yywh" path="res://resources/ability_loadouts/abilites_loadout_resource.gd" id="1_h6168"]
 [ext_resource type="Resource" uid="uid://cug4m1si7o0qb" path="res://resources/ability_loadouts/ezreal/q.tres" id="1_u7s56"]
+[ext_resource type="Resource" uid="uid://bo3grgc5s2u4q" path="res://resources/ability_loadouts/ezreal/w.tres" id="3_jmc5r"]
 
 [resource]
 script = ExtResource("1_h6168")
 q = ExtResource("1_u7s56")
+w = ExtResource("3_jmc5r")
 metadata/_custom_type_script = "uid://ce344ma11yywh"

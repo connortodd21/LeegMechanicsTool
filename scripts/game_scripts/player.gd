@@ -59,7 +59,7 @@ func process_skills() -> void:
 		if Input.is_action_just_pressed("q"):
 			cast_ability(ability_loadout.q)
 		if Input.is_action_just_pressed("w"):
-			pass
+			cast_ability(ability_loadout.w)
 		if Input.is_action_just_pressed("e"):
 			pass
 		if Input.is_action_just_pressed("r"):

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b8idpypi387md"]
 
 [ext_resource type="Script" uid="uid://dtgmtsvy8nji5" path="res://scripts/abilities/ezreal/ezreal_q.gd" id="1_mpnen"]
-[ext_resource type="Texture2D" uid="uid://bkytv23dsf1lw" path="res://assets/Skillshots/ezreal_q.png" id="2_anhdm"]
+[ext_resource type="Texture2D" uid="uid://bkytv23dsf1lw" path="res://assets/Skillshots/ezreal/ezreal_q.png" id="2_anhdm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7hjpq"]
 atlas = ExtResource("2_anhdm")

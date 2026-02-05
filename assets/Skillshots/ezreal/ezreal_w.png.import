@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkytv23dsf1lw"
-path="res://.godot/imported/ezreal_q.png-ef4e9fc7752ca7d7ec7cebda09f86c27.ctex"
+uid="uid://bp6iu4fa1pcrv"
+path="res://.godot/imported/ezreal_w.png-dfbee088cd3937e8524bc189d6553d1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Skillshots/ezreal_q.png"
-dest_files=["res://.godot/imported/ezreal_q.png-ef4e9fc7752ca7d7ec7cebda09f86c27.ctex"]
+source_file="res://assets/Skillshots/ezreal/ezreal_w.png"
+dest_files=["res://.godot/imported/ezreal_w.png-dfbee088cd3937e8524bc189d6553d1b.ctex"]
 
 [params]
 
