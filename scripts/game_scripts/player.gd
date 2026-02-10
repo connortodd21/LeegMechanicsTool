@@ -40,16 +40,7 @@ func _physics_process(_delta: float) -> void:
 
 
 ################################################
-### MOUSE DATA
-################################################
-func get_mouse_direction() -> Vector2:
-	var mouse_pos = get_global_mouse_position()
-	var mouse_direction = mouse_pos - global_position
-	return mouse_direction.normalized()  
-
-
-################################################
-### PLAYER SKILLS
+### PLAYER ABILITIES
 ################################################
 func load_character_skills():
 	ability_loadout = character_data.ability_loadout
@@ -61,7 +52,7 @@ func process_skills() -> void:
 		if Input.is_action_just_pressed("w"):
 			cast_ability(ability_loadout.w)
 		if Input.is_action_just_pressed("e"):
-			pass
+			cast_ability(ability_loadout.e)
 		if Input.is_action_just_pressed("r"):
 			pass
 
@@ -69,12 +60,17 @@ func cast_ability(ability: AbilityResource) -> void:
 	if ability != null:
 		if character.get_cooldown(ability) <= 0:
 			character.set_cooldown(ability)
-			var mouse_direction = get_mouse_direction()
-			last_facing_direction = mouse_direction.normalized()
+			var ability_cast_metadata = get_ability_cast_metadata()
+			last_facing_direction = ability_cast_metadata.get_mouse_direction().normalized()
 			if ability.should_stop_movement:
 				set_character_to_idle(last_facing_direction)
-			ability_manager.cast(ability, global_position, mouse_direction)
+			ability_manager.cast(ability, self, ability_cast_metadata)
 
+
+func get_ability_cast_metadata() -> AbilityCastMetadata:
+	var mouse_position = get_global_mouse_position()
+	var mouse_direction = MouseUtils.get_mouse_direction(mouse_position, global_position)
+	return AbilityCastMetadata.new(mouse_position, mouse_direction)
 
 ################################################ 
 ### PLAYER MOVEMENT
@@ -117,6 +113,11 @@ func update_animation(animation_metadata: PlayerAnimationMetadata) -> void:
 		animated_sprite_2d.flip_h = animation_metadata.get_should_flip_h()
 
 
+func stop_movement() -> void:
+	move_to_location = global_position
+	velocity = Vector2.ZERO
+
+
 ################################################ 
 ### Character Animations
 ################################################
@@ -124,6 +125,7 @@ func setup_visuals():
 	var animation_scene = character_data.animations_scene.instantiate()
 	character_animations.add_child(animation_scene)
 	animated_sprite_2d = animation_scene.get_node("AnimatedSprite2D")
+
 
 ################################################ 
 ### EFFECTS

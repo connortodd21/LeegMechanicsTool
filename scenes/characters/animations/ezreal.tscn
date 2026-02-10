@@ -293,3 +293,4 @@ animations = [{
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_mfyqv")
 animation = &"idle_front"
+autoplay = "idle_front"

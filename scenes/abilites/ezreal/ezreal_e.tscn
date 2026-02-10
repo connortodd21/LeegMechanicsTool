@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://jpd5ubjanwsj"]
+
+[ext_resource type="Script" uid="uid://cpgojbnphy0di" path="res://scripts/abilities/ezreal/ezreal_e.gd" id="1_kclgg"]
+
+[node name="ezreal_e" type="Node2D" unique_id=577087160]
+script = ExtResource("1_kclgg")
