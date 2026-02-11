@@ -7,6 +7,7 @@ const W = "W"
 const E = "E"
 const R = "R"
 var ability_cooldowns := {}
+var summoner_spell_cooldowns := {}
 
 func _init(character_data : CharacterData) -> void:
 	character_metadata = CharacterMetadata.new(
@@ -19,6 +20,25 @@ func _init(character_data : CharacterData) -> void:
 		character_data.move_speed,
 		character_data.character
 	)
+
+
+################################################
+### SUMMONER SPELL ATTRIBUTES
+################################################
+func get_summoner_spell_cooldown(summoner_spell: SummonerSpellDataResource) -> float:
+	if summoner_spell in summoner_spell_cooldowns.keys():
+		return summoner_spell_cooldowns[summoner_spell]
+	return -1
+
+
+func set_summoner_spell_cooldown(summoner_spell: SummonerSpellDataResource) -> void:
+	summoner_spell_cooldowns[summoner_spell] = summoner_spell.cooldown
+
+
+func tick_summoner_spell_cooldowns(delta: float) -> void:
+	for summoner_spell in summoner_spell_cooldowns.keys():
+		if summoner_spell_cooldowns[summoner_spell] >= 0:
+			summoner_spell_cooldowns[summoner_spell] -= delta
 
 
 ################################################
@@ -52,6 +72,8 @@ func increase_mana(mana_amount: float) -> void:
 func heal(heal_amount: float) -> void:
 	character_metadata.health = clamp(character_metadata.health + heal_amount, character_metadata.health, character_metadata.max_health)
 
+func increase_move_speed(speed_amount: float) -> void:
+	character_metadata.move_speed += speed_amount
 
 ################################################
 ### PLAYER ANIMATION METADATA

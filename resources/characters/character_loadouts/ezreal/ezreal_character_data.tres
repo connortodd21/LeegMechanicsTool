@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://ctaxjc7yl101f"]
 
-[ext_resource type="Script" uid="uid://d2ia3n2syv3hd" path="res://resources/characters/character_data.gd" id="1_e6uup"]
+[ext_resource type="Script" uid="uid://d2ia3n2syv3hd" path="res://resources/characters/character_loadouts/character_data.gd" id="1_e6uup"]
 [ext_resource type="Resource" uid="uid://kh0gnd8jkrte" path="res://resources/ability_loadouts/ezreal/loadout.tres" id="1_p1kd0"]
 [ext_resource type="PackedScene" uid="uid://bw5iy2yxkorx6" path="res://scenes/characters/animations/ezreal.tscn" id="2_0abxb"]
 

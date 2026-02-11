@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CharacterConfigResource" format=3 uid="uid://4m5eejmvpq5s"]
+
+[ext_resource type="Script" uid="uid://csegcycb3pj88" path="res://resources/characters/character_loadouts/character_config.gd" id="1_sk8j0"]
+[ext_resource type="Resource" uid="uid://kh0gnd8jkrte" path="res://resources/ability_loadouts/ezreal/loadout.tres" id="1_xcf26"]
+[ext_resource type="PackedScene" uid="uid://bw5iy2yxkorx6" path="res://scenes/characters/animations/ezreal.tscn" id="2_612yc"]
+[ext_resource type="Resource" uid="uid://ctaxjc7yl101f" path="res://resources/characters/character_loadouts/ezreal/ezreal_character_data.tres" id="2_kms6n"]
+
+[resource]
+script = ExtResource("1_sk8j0")
+character_data = ExtResource("2_kms6n")
+ability_loadout = ExtResource("1_xcf26")
+character_animations = ExtResource("2_612yc")
+metadata/_custom_type_script = "uid://csegcycb3pj88"

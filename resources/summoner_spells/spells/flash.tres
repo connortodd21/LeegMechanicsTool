@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SummonerSpellDataResource" format=3 uid="uid://dhtlgky3fvjtg"]
+
+[ext_resource type="Script" uid="uid://clegy1yxwpjgk" path="res://resources/summoner_spells/summoner_spell_data.gd" id="1_me577"]
+[ext_resource type="PackedScene" uid="uid://b8v1d7emrf7wg" path="res://scenes/summoner_spells/flash.tscn" id="2_pmhrv"]
+
+[resource]
+script = ExtResource("1_me577")
+name = 4
+cooldown = 300.0
+scene = ExtResource("2_pmhrv")
+metadata/_custom_type_script = "uid://clegy1yxwpjgk"

@@ -1,12 +1,22 @@
 [gd_scene format=3 uid="uid://deicbgfiuaahr"]
 
+[ext_resource type="Script" uid="uid://tdp5ey3hg0gn" path="res://scripts/game_scripts/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://cei2amnkgqvrb" path="res://scenes/player.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://dgbenuhc1gc2q" path="res://scenes/abilites_manager.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://csegcycb3pj88" path="res://resources/characters/character_loadouts/character_config.gd" id="2_jyhfs"]
+[ext_resource type="Resource" uid="uid://4m5eejmvpq5s" path="res://resources/characters/character_loadouts/ezreal/ezreal_config.tres" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://clegy1yxwpjgk" path="res://resources/summoner_spells/summoner_spell_data.gd" id="4_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cvg36wckcnfql" path="res://scenes/effects/click_move_effect.tscn" id="4_tbgi4"]
+[ext_resource type="Resource" uid="uid://dhtlgky3fvjtg" path="res://resources/summoner_spells/spells/flash.tres" id="5_tipki"]
+[ext_resource type="Resource" uid="uid://b4vqwhd6ouwpu" path="res://resources/summoner_spells/spells/ghost.tres" id="6_tipki"]
 
 [node name="main" type="Node2D" unique_id=1749545947]
+script = ExtResource("1_0wfyh")
+available_champions = Array[ExtResource("2_jyhfs")]([ExtResource("3_tbgi4")])
+available_summoners = Array[ExtResource("4_o6xl0")]([ExtResource("5_tipki"), ExtResource("6_tipki")])
+click_move_effect_scene = ExtResource("4_tbgi4")
 
 [node name="Player" parent="." unique_id=89627237 instance=ExtResource("1_o5qli")]
 position = Vector2(534, 327)
 scale = Vector2(3, 3)
 
-[node name="AbilitiesManager" parent="." unique_id=686611845 instance=ExtResource("2_0wfyh")]
+[connection signal="player_clicked" from="Player" to="." method="spawn_click_effect"]

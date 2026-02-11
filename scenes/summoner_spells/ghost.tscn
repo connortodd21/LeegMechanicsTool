@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://wmjrlcq3w625"]
+
+[ext_resource type="Script" uid="uid://ytnvruyo4cuc" path="res://scripts/summoner_spells/ghost.gd" id="1_yjgw8"]
+
+[node name="ghost" type="Node2D" unique_id=360195733]
+script = ExtResource("1_yjgw8")
+duration = 15.0
+speed_increase = 100.0
+
+[node name="Timer" type="Timer" parent="." unique_id=1490749237]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,14 @@
+class_name SummonerSpells
+
+enum SUMMONER_SPELL {
+	BARRIER,
+	CLARITY,
+	CLEANSE,
+	EXHAUST,
+	FLASH,
+	GHOST,
+	HEAL,
+	IGNITE,
+	SNOWBALL,
+	TELEPORT
+}

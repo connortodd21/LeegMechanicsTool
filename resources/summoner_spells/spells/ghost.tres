@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SummonerSpellDataResource" format=3 uid="uid://b4vqwhd6ouwpu"]
+
+[ext_resource type="PackedScene" uid="uid://wmjrlcq3w625" path="res://scenes/summoner_spells/ghost.tscn" id="1_6v8kl"]
+[ext_resource type="Script" uid="uid://clegy1yxwpjgk" path="res://resources/summoner_spells/summoner_spell_data.gd" id="1_u8awg"]
+
+[resource]
+script = ExtResource("1_u8awg")
+name = 5
+scene = ExtResource("1_6v8kl")
+metadata/_custom_type_script = "uid://clegy1yxwpjgk"

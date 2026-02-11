@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-var move_to_location : Vector2
-const stop_moving_vector := Vector2(0,0)
+# signals
+signal player_clicked
 
 # character
 var character : BaseCharacter
-@export var character_data : CharacterData
+var character_data : CharacterData
 
 # character animations
 var animated_sprite_2d : AnimatedSprite2D
@@ -13,38 +13,50 @@ var animated_sprite_2d : AnimatedSprite2D
 
 # abilities
 var ability_loadout: AbilityLoadoutResource
-@onready var ability_manager = $"../AbilitiesManager"
+@onready var ability_manager = $"AbilitiesManager"
 
-# effects
-@export var click_move_effect_scene: PackedScene
+# summoner spells
+@onready var summoner_spell_manager = $SummonerSpellManager
 
 # movement
 var last_facing_direction := Vector2.DOWN # the last known direction the character is facing
+var move_to_location : Vector2
+const stop_moving_vector := Vector2(0,0)
+
+func initialize(config: CharacterConfigResource, summoner_loadout: SummonerSpellLoadoutResource) -> void:
+	character_data = config.character_data
+	character = BaseCharacter.new(character_data)
+	
+	ability_loadout = config.ability_loadout
+	
+	if summoner_loadout:
+		summoner_spell_manager.set_summoner_spells(summoner_loadout.slot1, summoner_loadout.slot2)
+	
+	setup_visuals(config)
+
 
 func _ready() -> void:
-	character = BaseCharacter.new(character_data)
-	load_character_skills()
-	setup_visuals()
+	pass
+
 
 func _physics_process(_delta: float) -> void:
-	process_movement()
-	process_skills()
-	character.tick_cooldowns(_delta)
-	character.regen(_delta)
-	
-	if position.distance_to(move_to_location) > 10:
-		move_and_slide()
-		last_facing_direction =(move_to_location - position).normalized()
-	else:
-		set_character_to_idle(last_facing_direction)
+	if character:
+		process_movement()
+		process_skills()
+		character.tick_cooldowns(_delta)
+		character.tick_summoner_spell_cooldowns(_delta)
+		character.regen(_delta)
+		
+		if position.distance_to(move_to_location) > 10:
+			move_and_slide()
+			last_facing_direction =(move_to_location - position).normalized()
+		else:
+			set_character_to_idle(last_facing_direction)
 
 
 ################################################
 ### PLAYER ABILITIES
 ################################################
-func load_character_skills():
-	ability_loadout = character_data.ability_loadout
-
 func process_skills() -> void:
 	if ability_loadout != null:
 		if Input.is_action_just_pressed("q"):
@@ -67,6 +79,19 @@ func cast_ability(ability: AbilityResource) -> void:
 			ability_manager.cast(ability, self, ability_cast_metadata)
 
 
+func cast_summoner_spell(summoner_spell: SummonerSpellDataResource) -> void:
+	if summoner_spell != null:
+		if character.get_summoner_spell_cooldown(summoner_spell) <= 0:
+			character.set_summoner_spell_cooldown(summoner_spell)
+			var summoner_spell_cast_metadata = get_summoner_spell_cast_metadata()
+			summoner_spell_manager.cast(self, summoner_spell, summoner_spell_cast_metadata)
+
+
+func get_summoner_spell_cast_metadata() -> SummonerCastMetadata:
+	var mouse_position = get_global_mouse_position()
+	var mouse_direction = MouseUtils.get_mouse_direction(mouse_position, global_position)
+	return SummonerCastMetadata.new(mouse_position, mouse_direction)
+
 func get_ability_cast_metadata() -> AbilityCastMetadata:
 	var mouse_position = get_global_mouse_position()
 	var mouse_direction = MouseUtils.get_mouse_direction(mouse_position, global_position)
@@ -80,11 +105,16 @@ func process_movement() -> void:
 	if Input.is_action_just_pressed("move_to_spot"):
 		move_to_location = get_global_mouse_position()
 		velocity = global_position.direction_to(move_to_location) * CharacterUtils.get_move_speed(character)
-		spawn_click_effect(move_to_location)
+		player_clicked.emit(move_to_location)
 		handle_move_character()
 	# stop command
 	if Input.is_action_pressed("s"):
 		set_character_to_idle(last_facing_direction)
+	# summoner spells
+	if Input.is_action_just_pressed("summoner_1"):
+		cast_summoner_spell(summoner_spell_manager.get_first_summoner_spell())
+	if Input.is_action_just_pressed("summoner_2"):
+		cast_summoner_spell(summoner_spell_manager.get_second_summoner_spell())
 
 
 func set_character_to_idle(facing_direction: Vector2 = Vector2.DOWN) -> void:
@@ -121,18 +151,7 @@ func stop_movement() -> void:
 ################################################ 
 ### Character Animations
 ################################################
-func setup_visuals():
-	var animation_scene = character_data.animations_scene.instantiate()
+func setup_visuals(config: CharacterConfigResource) -> void:
+	var animation_scene = config.character_animations.instantiate()
 	character_animations.add_child(animation_scene)
 	animated_sprite_2d = animation_scene.get_node("AnimatedSprite2D")
-
-
-################################################ 
-### EFFECTS
-################################################
-# TODO: MOVE THIS TO MAIN SCENE
-func spawn_click_effect(click_position: Vector2, color: Color = Color.DARK_GREEN) -> void:
-	var effect = click_move_effect_scene.instantiate()
-	effect.global_position = click_position
-	effect.color = color
-	get_tree().current_scene.add_child(effect)

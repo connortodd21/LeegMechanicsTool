@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://cei2amnkgqvrb"]
 
 [ext_resource type="Script" uid="uid://cgmoivs4i60cg" path="res://scripts/game_scripts/player.gd" id="1_g2els"]
-[ext_resource type="Resource" uid="uid://ctaxjc7yl101f" path="res://resources/characters/character_loadouts/ezreal_character_data.tres" id="2_qhqgy"]
-[ext_resource type="PackedScene" uid="uid://cvg36wckcnfql" path="res://scenes/effects/click_move_effect.tscn" id="2_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://dgbenuhc1gc2q" path="res://scenes/managers/abilites_manager.tscn" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://b4ngrbscjqgeh" path="res://scenes/managers/summoner_spell_manager.tscn" id="3_qhqgy"]
 
 [node name="Player" type="CharacterBody2D" unique_id=640731228]
 script = ExtResource("1_g2els")
-character_data = ExtResource("2_qhqgy")
-click_move_effect_scene = ExtResource("2_qlg0r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1224331642]
 
 [node name="CharacterAnimations" type="Node2D" parent="." unique_id=156556002]
+
+[node name="AbilitiesManager" parent="." unique_id=686611845 instance=ExtResource("2_g2els")]
+
+[node name="SummonerSpellManager" parent="." unique_id=1924291867 instance=ExtResource("3_qhqgy")]

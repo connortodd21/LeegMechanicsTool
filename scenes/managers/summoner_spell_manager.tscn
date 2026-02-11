@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b4ngrbscjqgeh"]
+
+[ext_resource type="Script" uid="uid://dpkm2sijxh6dp" path="res://scripts/summoner_spells/summoner_spell_manager.gd" id="1_10k2c"]
+
+[node name="summoner_spell_manager" type="Node2D" unique_id=1924291867]
+script = ExtResource("1_10k2c")

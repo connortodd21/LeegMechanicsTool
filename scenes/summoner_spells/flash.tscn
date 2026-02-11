@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b8v1d7emrf7wg"]
+
+[ext_resource type="Script" uid="uid://bhvluwnbuow3y" path="res://scripts/summoner_spells/flash.gd" id="1_8xeuo"]
+
+[node name="Flash" type="Node2D" unique_id=1120359576]
+script = ExtResource("1_8xeuo")
