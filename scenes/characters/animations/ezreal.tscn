@@ -287,6 +287,12 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4igi"]
+size = Vector2(13, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfyqv"]
+size = Vector2(13, 18)
+
 [node name="Ezreal" type="Node2D" unique_id=1824228775]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=380907042]
@@ -294,3 +300,15 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_mfyqv")
 animation = &"idle_front"
 autoplay = "idle_front"
+
+[node name="AbilityCollision" type="Area2D" parent="." unique_id=364119014]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AbilityCollision" unique_id=1280769899]
+position = Vector2(-0.5, -2)
+shape = SubResource("RectangleShape2D_g4igi")
+
+[node name="TerrainCollision" type="Area2D" parent="." unique_id=535814658]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TerrainCollision" unique_id=122823707]
+position = Vector2(-0.5, -2)
+shape = SubResource("RectangleShape2D_mfyqv")

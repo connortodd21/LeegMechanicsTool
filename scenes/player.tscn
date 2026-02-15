@@ -7,10 +7,10 @@
 [node name="Player" type="CharacterBody2D" unique_id=640731228]
 script = ExtResource("1_g2els")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1224331642]
-
 [node name="CharacterAnimations" type="Node2D" parent="." unique_id=156556002]
 
 [node name="AbilitiesManager" parent="." unique_id=686611845 instance=ExtResource("2_g2els")]
 
 [node name="SummonerSpellManager" parent="." unique_id=1924291867 instance=ExtResource("3_qhqgy")]
+
+[node name="CharacterCollisionManager" type="Node2D" parent="." unique_id=813009423]

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bjsqed0dekocw"]
+
+[ext_resource type="PackedScene" uid="uid://bw5iy2yxkorx6" path="res://scenes/characters/animations/ezreal.tscn" id="1_gaff5"]
+[ext_resource type="Script" uid="uid://cx0eewas0uuua" path="res://scripts/characters/collision/ezreal.gd" id="1_nb2b7"]
+
+[node name="Ezreal" type="Node2D" unique_id=987772282]
+script = ExtResource("1_nb2b7")
+
+[node name="ezreal-reference" parent="." unique_id=1824228775 instance=ExtResource("1_gaff5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1933011766]

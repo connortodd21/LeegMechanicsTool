@@ -11,6 +11,9 @@ var character_data : CharacterData
 var animated_sprite_2d : AnimatedSprite2D
 @onready var character_animations: Node2D = $CharacterAnimations
 
+# character collision
+@onready var character_collision_manager: Node2D = $CharacterCollisionManager
+
 # abilities
 var ability_loadout: AbilityLoadoutResource
 @onready var ability_manager = $"AbilitiesManager"
@@ -155,3 +158,11 @@ func setup_visuals(config: CharacterConfigResource) -> void:
 	var animation_scene = config.character_animations.instantiate()
 	character_animations.add_child(animation_scene)
 	animated_sprite_2d = animation_scene.get_node("AnimatedSprite2D")
+
+
+################################################ 
+### Character Collision
+################################################
+func setup_collision(config: CharacterConfigResource) -> void:
+	var collision = config.character_collision.instantiate()
+	character_collision_manager.add_child(collision)

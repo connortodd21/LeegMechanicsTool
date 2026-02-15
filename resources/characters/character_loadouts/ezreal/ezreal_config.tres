@@ -4,10 +4,12 @@
 [ext_resource type="Resource" uid="uid://kh0gnd8jkrte" path="res://resources/ability_loadouts/ezreal/loadout.tres" id="1_xcf26"]
 [ext_resource type="PackedScene" uid="uid://bw5iy2yxkorx6" path="res://scenes/characters/animations/ezreal.tscn" id="2_612yc"]
 [ext_resource type="Resource" uid="uid://ctaxjc7yl101f" path="res://resources/characters/character_loadouts/ezreal/ezreal_character_data.tres" id="2_kms6n"]
+[ext_resource type="PackedScene" uid="uid://bjsqed0dekocw" path="res://scenes/characters/collision/ezreal.tscn" id="3_612yc"]
 
 [resource]
 script = ExtResource("1_sk8j0")
 character_data = ExtResource("2_kms6n")
 ability_loadout = ExtResource("1_xcf26")
 character_animations = ExtResource("2_612yc")
+character_collision = ExtResource("3_612yc")
 metadata/_custom_type_script = "uid://csegcycb3pj88"
