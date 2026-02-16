@@ -15,6 +15,7 @@ func _initialize(_caster: Node2D, ability_cast_metadata: AbilityCastMetadata) ->
 	start_position = caster.global_position
 	direction = ability_cast_metadata.get_mouse_direction().normalized()
 
+
 func _process(delta):
 	position += direction * speed * delta
 	

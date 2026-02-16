@@ -26,6 +26,15 @@ var last_facing_direction := Vector2.DOWN # the last known direction the charact
 var move_to_location : Vector2
 const stop_moving_vector := Vector2(0,0)
 
+# controller
+var controller : BaseCharacterController
+
+
+func set_controller(_controller: BaseCharacterController) -> void:
+	controller = _controller
+	controller.initialize(self)
+
+
 func initialize(config: CharacterConfigResource, summoner_loadout: SummonerSpellLoadoutResource) -> void:
 	character_data = config.character_data
 	character = BaseCharacter.new(character_data)
@@ -38,14 +47,9 @@ func initialize(config: CharacterConfigResource, summoner_loadout: SummonerSpell
 	setup_visuals(config)
 
 
-func _ready() -> void:
-	pass
-
-
 func _physics_process(_delta: float) -> void:
 	if character:
-		process_movement()
-		process_skills()
+		controller.tick(_delta)
 		character.tick_cooldowns(_delta)
 		character.tick_summoner_spell_cooldowns(_delta)
 		character.regen(_delta)
@@ -58,19 +62,8 @@ func _physics_process(_delta: float) -> void:
 
 
 ################################################
-### PLAYER ABILITIES
+### ABILITIES
 ################################################
-func process_skills() -> void:
-	if ability_loadout != null:
-		if Input.is_action_just_pressed("q"):
-			cast_ability(ability_loadout.q)
-		if Input.is_action_just_pressed("w"):
-			cast_ability(ability_loadout.w)
-		if Input.is_action_just_pressed("e"):
-			cast_ability(ability_loadout.e)
-		if Input.is_action_just_pressed("r"):
-			pass
-
 func cast_ability(ability: AbilityResource) -> void:
 	if ability != null:
 		if character.get_cooldown(ability) <= 0:
@@ -80,6 +73,18 @@ func cast_ability(ability: AbilityResource) -> void:
 			if ability.should_stop_movement:
 				set_character_to_idle(last_facing_direction)
 			ability_manager.cast(ability, self, ability_cast_metadata)
+
+
+func cast_ability_at_position(ability: AbilityResource, target_position: Vector2) -> void:
+	if ability != null:
+		if character.get_cooldown(ability) <= 0:
+			character.set_cooldown(ability)
+			var direction = (target_position - global_position).normalized()
+			var metadata = AbilityCastMetadata.new(target_position, direction)
+			last_facing_direction = direction
+			if ability.should_stop_movement:
+				set_character_to_idle(last_facing_direction)
+			ability_manager.cast(ability, self, metadata)
 
 
 func cast_summoner_spell(summoner_spell: SummonerSpellDataResource) -> void:
@@ -95,31 +100,15 @@ func get_summoner_spell_cast_metadata() -> SummonerCastMetadata:
 	var mouse_direction = MouseUtils.get_mouse_direction(mouse_position, global_position)
 	return SummonerCastMetadata.new(mouse_position, mouse_direction)
 
+
 func get_ability_cast_metadata() -> AbilityCastMetadata:
 	var mouse_position = get_global_mouse_position()
 	var mouse_direction = MouseUtils.get_mouse_direction(mouse_position, global_position)
 	return AbilityCastMetadata.new(mouse_position, mouse_direction)
 
 ################################################ 
-### PLAYER MOVEMENT
+### MOVEMENT
 ################################################
-func process_movement() -> void:
-	# move command
-	if Input.is_action_just_pressed("move_to_spot"):
-		move_to_location = get_global_mouse_position()
-		velocity = global_position.direction_to(move_to_location) * CharacterUtils.get_move_speed(character)
-		player_clicked.emit(move_to_location)
-		handle_move_character()
-	# stop command
-	if Input.is_action_pressed("s"):
-		set_character_to_idle(last_facing_direction)
-	# summoner spells
-	if Input.is_action_just_pressed("summoner_1"):
-		cast_summoner_spell(summoner_spell_manager.get_first_summoner_spell())
-	if Input.is_action_just_pressed("summoner_2"):
-		cast_summoner_spell(summoner_spell_manager.get_second_summoner_spell())
-
-
 func set_character_to_idle(facing_direction: Vector2 = Vector2.DOWN) -> void:
 	var move_to_direction : MovementConstants.MOVE_DIRECTION
 	# if character is moving

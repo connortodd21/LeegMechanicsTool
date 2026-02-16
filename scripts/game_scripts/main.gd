@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var player: CharacterBody2D = $Player
+@onready var bot: CharacterBody2D = $Bot
 
 # Characters
 @export var available_champions: Array[CharacterConfigResource]
@@ -13,8 +14,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	var selected_champion = get_selected_champion()
-	start_game(selected_champion)
+	start_game()
 
 
 ################################################
@@ -29,6 +29,22 @@ func get_selected_champion() -> CharacterConfigResource:
 	return available_champions[0]
 
 
+func add_player_character() -> void:
+	var controller = PlayerController.new()
+	var selected_champion = get_selected_champion()
+	player.set_controller(controller)
+	player.initialize(selected_champion, get_summoner_spells())
+
+
+func add_bot(target: Node) -> void:
+	var bot_champion = get_selected_champion()
+	var bot_controller = BotController.new()
+	bot_controller.set_target(target)
+	
+	bot.set_controller(bot_controller)
+	bot.initialize(bot_champion, get_summoner_spells())
+
+
 func get_summoner_spells() -> SummonerSpellLoadoutResource:
 	var summoner_spells = SummonerSpellLoadoutResource.new()
 	summoner_spells.slot1 = available_summoners[0]
@@ -39,14 +55,9 @@ func get_summoner_spells() -> SummonerSpellLoadoutResource:
 ################################################
 ### GAME START
 ################################################
-func start_game(character_config: CharacterConfigResource) -> void:
-	if character_config == null:
-		push_error("Champion is null.")
-		return
-
-	
-	player.initialize(character_config, get_summoner_spells())
-
+func start_game() -> void:
+	add_player_character()
+	add_bot(player)
 
 ################################################ 
 ### EFFECTS
